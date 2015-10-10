@@ -109,6 +109,14 @@ style this element.
       },
 
       /**
+       * The type for this input.
+       */
+      type: {
+        type: String,
+        value: "email"
+      },
+
+      /**
        * The regular expression used to validate the email. Defaults to the
        * regular expression defined in the spec: http://www.w3.org/TR/html-markup/input.email.html#input.email.attrs.value.single.
        * If left blank, then no validation will be applied.
@@ -126,15 +134,6 @@ style this element.
     observers: [
       '_onFocusedChanged(focused)'
     ],
-
-    attached: function () {
-
-      var form = this._getForm();
-      if (form != null
-            && form.hasAttribute('novalidate')) {
-        this.type = 'email';
-      }
-    },
 
     ready: function () {
       // If there's an initial input, validate it.
@@ -186,18 +185,6 @@ style this element.
     _onFocusedChanged: function(focused) {
       if (!focused) {
         this._handleAutoValidate();
-      }
-    },
-
-    /**
-     * Finds the form associated with the input element up the tree
-     **/
-    _getForm: function () {
-
-      if (this.form) return this.form;
-      var parent = this;
-      while (parent = parent.parentElement) {
-        if (parent.tagName.toUpperCase() === 'FORM') return parent;
       }
     }
   })

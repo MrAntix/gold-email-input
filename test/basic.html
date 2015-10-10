@@ -37,13 +37,13 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     </template>
   </test-fixture>
 
-  <test-fixture id="input-type-no-form">
+  <test-fixture id="native-validation-no-form">
     <template>
       <gold-email-input></gold-email-input>
     </template>
   </test-fixture>
 
-  <test-fixture id="input-type-with-form-novalidate-not-set">
+  <test-fixture id="native-validation-with-form-novalidate-not-set">
     <template>
       <form>
         <gold-email-input></gold-email-input>
@@ -51,7 +51,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     </template>
   </test-fixture>
 
-  <test-fixture id="input-type-with-form-novalidate-set">
+  <test-fixture id="native-validation-with-form-novalidate-set">
     <template>
       <form novalidate>
         <gold-email-input></gold-email-input>
@@ -222,37 +222,37 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
     });
 
-    suite('input-type', function () {
+    suite('type and native validation', function () {
 
       test('when has no form, type set to null', function (done) {
 
-        var element = fixture('input-type-no-form');
+        var element = fixture('native-validation-no-form');
         forceXIfStamp(element);
 
         var input = Polymer.dom(element.root).querySelector('input');
-        assert.equal(null, input.getAttribute('type'));
+        assert.equal(input.getAttribute('type'), '');
 
         done();
       });
 
       test('when has form, but novalidate is not set, type set to null', function (done) {
 
-        var element = fixture('input-type-with-form-novalidate-not-set');
+        var element = fixture('native-validation-with-form-novalidate-not-set');
         forceXIfStamp(element);
 
         var input = element.querySelector('input');
-        assert.equal(null, input.getAttribute('type'));
+        assert.equal(input.getAttribute('type'), '');
 
         done();
       });
 
       test('when has form, novalidate is set, type set to "email"', function (done) {
 
-        var element = fixture('input-type-with-form-novalidate-set');
+        var element = fixture('native-validation-with-form-novalidate-set');
         forceXIfStamp(element);
 
         var input = element.querySelector('input');
-        assert.equal('email', input.getAttribute('type'));
+        assert.equal(input.getAttribute('type'), 'email');
 
         done();
       });
